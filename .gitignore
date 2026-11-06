@@ -1,3 +1,29 @@
+# Credentials. Never commit these. See .env.example for the shape.
+.env
+.env.*
+!.env.example
+*.cnf
+*.my.cnf
+
+# Local scratch output produced by run.sh / tests
+out/
+*.log
+*.err
+
+# Captured output that a test produced but has not been reviewed yet
+tests/**/*.actual
+
+# OS / editor noise
+.DS_Store
+._*
+.idea/
+.vscode/
+*.swp
+
+# Python bytecode (the harness is stdlib-only, but imports still cache)
+__pycache__/
+*.py[cod]
+
+# Legacy patterns kept from the first commit
 *.db
 *.sqlite
-.DS_Store
