@@ -7,12 +7,13 @@
 # .PHONY because these are actions, not files. Without it, a file named
 # "test" in the repo would make `make test` decide there was nothing to do.
 
-.PHONY: help check schema seed reset test demo shell
+.PHONY: help check docs schema seed reset test demo shell
 
 help:
 	@./run.sh --help || true
 
 check:  ; @./run.sh check
+docs:   ; @./run.sh docs
 schema: ; @./run.sh schema
 seed:   ; @./run.sh seed
 reset:  ; @./run.sh reset

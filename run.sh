@@ -10,6 +10,7 @@
 # Usage: ./run.sh <target>
 #   check    verify server access and that every SQL feature this project needs
 #            is actually supported by the server you are pointed at
+#   docs     grammar-check the Mermaid diagrams in docs/ (no database needed)
 #   schema   (re)create the schema
 #   seed     load sample data
 #   reset    drop and rebuild everything, then seed
@@ -209,6 +210,14 @@ SQL
   echo "RESULT: all probes PASS. This server supports everything the project needs."
 }
 
+# Checks the ER diagram in the docs against the Mermaid erDiagram grammar.
+# Needs no database, so it is useful before any .env exists. It is a grammar
+# check, NOT a render: it catches the mistakes that make GitHub show an error
+# box, but it does not prove the picture looks right.
+target_docs() {
+  python3 -I tools/check_mermaid.py docs/*.md
+}
+
 target_schema() { not_yet schema 2; }
 target_seed()   { not_yet seed 3; }
 target_reset()  { not_yet reset 3; }
@@ -231,6 +240,7 @@ main() {
   local target="${1:-}"
   case "$target" in
     check)  target_check ;;
+    docs)   target_docs ;;
     schema) target_schema ;;
     seed)   target_seed ;;
     reset)  target_reset ;;
